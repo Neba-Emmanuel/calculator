@@ -1,52 +1,54 @@
 <template>
     <div class="outline">
         <div class="head">
-            <nav>
+            
                 <h3 class="h3">CALCULATOR</h3>
-            </nav>
+            
         </div>
         <div class="screen">
             <div class="input1">
-               <input v-model="current" class="input-screen">
+               <!-- <input class="input-screen" v-cloak>{current}}  -->
+               <div class="input-screen" v-cloak>{{current}}</div>
             </div>
             <div class="input">
-               <input v-bind="press" class="output-screen">
+               <!-- <input class="output-screen" v-cloak>{{output}} -->
+               <div class="output-screen" v-cloak>{{output}}</div>
             </div>
         </div>
         <div class="btns">
 
             <div class="first-row">
-                <button class="btn operator" v-on:click="press">AC</button>
-                <button class="btn operator" v-on:click="press">%</button>
-                <button class="btn operator" v-on:click="press">/</button>
-                <button class="btn operator" v-on:click="press">x</button>
+                <button class="btn operator" v-on:click="cleanAll()">AC</button>
+                <button class="btn operator" v-on:click="operate('%')">%</button>
+                <button class="btn operator" v-on:click="operate('/')">/</button>
+                <button class="btn operator" v-on:click="operate('*')">x</button>
             </div>
 
             <div class="second-row">
-                <button class="btn" v-on:click="press">7</button>
-                <button class="btn" v-on:click="press">8</button>
-                <button class="btn" v-on:click="press">9</button>
-                <button class="btn operator" v-on:click="press">-</button>
+                <button class="btn" v-on:click="operate(7)">7</button>
+                <button class="btn" v-on:click="operate(8)">8</button>
+                <button class="btn" v-on:click="operate(9)">9</button>
+                <button class="btn operator" v-on:click="operate('-')">-</button>
             </div>
 
             <div class="third-row">
-                <button class="btn" v-on:click="press">4</button>
-                <button class="btn" v-on:click="press">5</button>
-                <button class="btn" v-on:click="press">6</button>
-                <button class="btn operator" v-on:click="press">+</button>
+                <button class="btn" v-on:click="operate(4)">4</button>
+                <button class="btn" v-on:click="operate(5)">5</button>
+                <button class="btn" v-on:click="operate(6)">6</button>
+                <button class="btn operator" v-on:click="operate('+')">+</button>
             </div>
 
             <div class="fourth-row">
-                <button class="btn-style-span" v-on:click="press">1</button>
-                <button class="btn-style-span" v-on:click="press">2</button>
-                <button class="btn-style-span" v-on:click="press">3</button>                
+                <button class="btn-style-span" v-on:click="operate(1)">1</button>
+                <button class="btn-style-span" v-on:click="operate(2)">2</button>
+                <button class="btn-style-span" v-on:click="operate(3)">3</button>                
             </div>
 
             <div class="firth-row">
-                <button class="btn-style-span" v-on:click="press">0</button>
-                <button class="btn-style-span" v-on:click="press">.</button>
-                <button class="btn-style-span operator" v-on:click="press">Del</button> 
-                <button class="btn tall-btn" v-on:click="press">=</button>               
+                <button class="btn-style-span" v-on:click="operate(0)">0</button>
+                <button class="btn-style-span" v-on:click="operate('.')">.</button>
+                <button class="btn-style-span operator" v-on:click="del()">Del</button> 
+                <button class="btn tall-btn" v-on:click="equal()">=</button>               
             </div>
         </div>
     </div>    
@@ -54,17 +56,52 @@
 
 <script>
 export default {
-    name: 'calculator',
-    data() {
-        return {
-            current: ''
-        }
-    
+  name: 'Calculator',
+  data () {
+    return {
+     current:"",
+     output: 0 
+    }
+  },
+  methods:{
+    operate(element){
+      console.log("operate..");
+      this.current +=element;
+      // console.log("this.formula:");
+      // console.log(this.formula);
     },
+    equal(){
+      console.log("equal..");
+      this.output = eval(this.current);
+      // console.log("this.formula:");
+      // console.log(this.formula);
+    },
+    // cleanResult(){
+    //   console.log("cleanResult..");
+    //   this.output = 0;
+    // },
+    del(){
+        console.log("drop..");
+        this.current = this.current.slice(0, -1);
+    },
+    cleanAll(){
+      console.log("cleanAll..");
+      this.current = "";
+      this.output = 0;
+    },
+   devided(){
+        console.log("devided.."); 
+        this.current===""||this.current.endsWith("+"||"-"||"*"||"/"||"%")? {} :  this.current="1/("+this.current+")";this.equal();
+   },
+ }
 }
 </script>
 
 <style scoped>
+[v-cloak]{
+    display: none;
+}	
+
 .outline{
     width: 375px;
     height: 667px;
@@ -97,6 +134,7 @@ h3{
 .screen{
     width: 100%;
     height: 200px;
+    margin-top: -30px;
     background-color: #fff;
 }
 
@@ -108,6 +146,9 @@ h3{
     outline: none;    
     text-align: right;    
     margin: 48px 0 0 1px;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
 }
 
 .output-screen{
@@ -118,6 +159,9 @@ h3{
     outline: none;    
     text-align: right;    
     margin: 5px 0 0 1px;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
 }
 
 .btns{
@@ -134,6 +178,8 @@ h3{
     border-radius: 8%;
     color: #fff;
     background-color: #b1a9a9;
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
 }
 
 .btn-style-span{
