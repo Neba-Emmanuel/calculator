@@ -1,6 +1,6 @@
 # calculator
 ## UI
-![Calculator](https://user-images.githubusercontent.com/37219226/132993247-c3444215-9f64-42eb-8f84-3a6ba6fccadc.png)
+![Screenshot from 2021-09-16 12-42-36](https://user-images.githubusercontent.com/37219226/133606233-73c460b6-d1c8-4b63-a319-312ecad5baf8.png)
 
 ## Project setup
 ```
