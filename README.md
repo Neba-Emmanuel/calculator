@@ -1,6 +1,6 @@
 # calculator
 ## UI
-![Screenshot from 2021-09-16 12-42-36](https://user-images.githubusercontent.com/37219226/133606233-73c460b6-d1c8-4b63-a319-312ecad5baf8.png)
+![Calculator](https://user-images.githubusercontent.com/37219226/134796904-60a0ac23-4fbb-4865-b376-b2d1222345e1.png)
 
 ## Project setup
 ```
@@ -26,3 +26,4 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 Don't forget to leave a star or contribute if u like the repository 💝 
+
